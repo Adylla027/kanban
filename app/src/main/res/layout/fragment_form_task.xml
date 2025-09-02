@@ -85,7 +85,7 @@
                     android:layout_width="88dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/rbDoing"
-                    android:buttonTint="@color/black"
+                    android:buttonTint="#03A9F4"
                     android:layout_weight="1"
                     android:text="@string/fazendo_radiobutton"
                     android:theme="@style/MyRadioButton"
@@ -95,7 +95,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/rbDone"
                     android:layout_weight="1"
-                    android:buttonTint="@color/black"
+                    android:buttonTint="#03A9F4"
                     android:text="@string/feita_radiobutton"
                     android:theme="@style/MyRadioButton"
                     android:textColor="@color/white"/>
@@ -120,7 +120,7 @@
                 android:id="@+id/progressBar"
                 android:layout_marginTop="8dp"
                 android:layout_gravity="center"
-                android:indeterminateTint="@color/white"
+                android:indeterminateTint="#03A9F4"
                 android:visibility="invisible"
                 app:layout_editor_absoluteX="152dp"
                 app:layout_editor_absoluteY="278dp"
@@ -128,18 +128,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/buttonSave"/>
-
-            <TextView
-                android:id="@+id/textViewNome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ashley Gabriela Ribeiro Jesus"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
