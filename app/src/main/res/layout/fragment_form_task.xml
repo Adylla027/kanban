@@ -80,6 +80,7 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_weight="1"
+                    android:buttonTint="#03A9F4"
                     android:checked="true"
                     android:text="@string/a_fazer_radiobutton"
                     android:textColor="@color/white"
