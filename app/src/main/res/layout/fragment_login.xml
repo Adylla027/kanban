@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:indeterminateTint="@color/white"
+            android:indeterminateTint="#03A9F4"
             android:visibility="invisible"
             tools:visibility="visible" />
     </LinearLayout>
@@ -98,8 +98,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Adylla Moreira Lopes"
-        android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textColor="#03A9F4"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
