@@ -1,4 +1,4 @@
-package com.ashley.task.ui.adapter
+package com.adylla.task.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,10 +8,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ashley.task.R
-import com.ashley.task.data.model.Status
-import com.ashley.task.data.model.Task
-import com.ashley.task.databinding.ItemTaskBinding
+import com.adylla.task.R
+import com.adylla.task.data.model.Status
+import com.adylla.task.data.model.Task
+import com.adylla.task.databinding.ItemTaskBinding
 
 class TaskAdapter(
     private val context: Context,
@@ -62,7 +62,7 @@ class TaskAdapter(
             }
             Status.DOING -> {
                 holder.binding.buttonBack.setColorFilter(ContextCompat.getColor(context, R.color.color_status_todo))
-                holder.binding.buttonFoward.setColorFilter( ContextCompat.getColor(context, R.color.color_status_done))
+                holder.binding.buttonFoward.setColorFilter( ContextCompat.getColor(context, R.color.color_status_todo))
                 holder.binding.buttonFoward.setOnClickListener { taskSelected(task, SELECT_NEXT) }
                 holder.binding.buttonBack.setOnClickListener { taskSelected(task, SELECT_BACK) }
 

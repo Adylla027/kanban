@@ -1,4 +1,4 @@
-package com.ashley.task
+package com.adylla.task
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.ashley.task.ui.auth
+package com.adylla.task.ui.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.ashley.task.R
-import com.ashley.task.databinding.FragmentRegisterBinding
-import com.ashley.task.util.initToolbar
-import com.ashley.task.util.showBottomSheet
+import com.adylla.task.R
+import com.adylla.task.databinding.FragmentRegisterBinding
+import com.adylla.task.util.initToolbar
+import com.adylla.task.util.showBottomSheet
 
 class RegisterFragment : Fragment() {
 

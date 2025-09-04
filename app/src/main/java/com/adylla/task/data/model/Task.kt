@@ -1,4 +1,4 @@
-package com.ashley.task.data.model
+package com.adylla.task.data.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 

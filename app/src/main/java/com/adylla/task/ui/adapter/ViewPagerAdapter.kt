@@ -1,4 +1,4 @@
-package com.ashley.task.ui.adapter
+package com.adylla.task.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
