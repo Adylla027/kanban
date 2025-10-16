@@ -5,15 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.adylla.task.R
 import com.adylla.task.databinding.FragmentRegisterBinding
 import com.adylla.task.util.initToolbar
 import com.adylla.task.util.showBottomSheet
+import com.google.firebase.auth.FirebaseAuth
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
+
+    private lateinit var auth: FirebaseAuth
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -50,6 +54,27 @@ class RegisterFragment : Fragment() {
         }else{
             showBottomSheet(message = getString(R.string.email_empty_register_fragment))
         }
+    }
+
+    private fun RegisterUser(email: String, password: String){
+        try{
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener() { task ->
+                    if (task.isSuccessful) {
+
+                        findNavController().navigate(R.id.action_global_homeFragment)
+
+                    }else{
+                        Toast.makeText(requireContext(),task.exception?.message, Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+        }catch (erro: Exception){
+
+            Toast.makeText(requireContext(),erro.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 
     override fun onDestroyView() {
