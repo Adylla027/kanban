@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.adylla.task.R
 import com.adylla.task.databinding.FragmentRegisterBinding
@@ -47,6 +48,8 @@ class RegisterFragment : Fragment() {
         val senha = binding.editTextSenha.text.toString().trim()
         if(email.isNotBlank()) {
             if (senha.isNotBlank()) {
+                binding.progressbar.isVisible = true
+                RegisterUser(email, senha)
                 findNavController().navigate(R.id.action_global_homeFragment)
             } else {
                 showBottomSheet(message = getString(R.string.password_empty_register_gragment))
@@ -65,6 +68,8 @@ class RegisterFragment : Fragment() {
                         findNavController().navigate(R.id.action_global_homeFragment)
 
                     }else{
+                        binding.progressbar.isVisible = false
+
                         Toast.makeText(requireContext(),task.exception?.message, Toast.LENGTH_SHORT).show()
 
                     }
