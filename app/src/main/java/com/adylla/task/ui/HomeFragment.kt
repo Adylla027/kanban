@@ -8,13 +8,17 @@ import android.view.ViewGroup
 import com.adylla.task.R
 import com.adylla.task.databinding.FragmentHomeBinding
 import com.adylla.task.ui.adapter.ViewPagerAdapter
+import com.adylla.task.util.showBottomSheet
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,8 +31,24 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+
         initTabs()
     }
+
+    private fun initListeners(){
+        binding.btnLogout.setOnClickListener {
+            showBottomSheet(
+                tittleButton = R.string.bu
+            )
+
+        }
+
+    }
+
+
+
     private fun initTabs() {
         val pageAdapter = ViewPagerAdapter(requireActivity())
         binding.viewPager.adapter = pageAdapter
