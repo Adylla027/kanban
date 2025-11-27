@@ -61,6 +61,8 @@ class RegisterFragment : Fragment() {
 
     private fun RegisterUser(email: String, password: String){
         try{
+            val auth = FirebaseAuth.getInstance()
+
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
