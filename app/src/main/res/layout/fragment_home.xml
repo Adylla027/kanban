@@ -39,7 +39,7 @@
                 android:background="#F4EE9D7E"
                 android:contentDescription="Logout"
                 android:padding="24dp"
-                android:src="@drawable/baseline_arrow_forward_24"
+                android:src="@drawable/baseline_logout_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 

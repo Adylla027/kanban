@@ -5,15 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.adylla.task.R
 import com.adylla.task.databinding.FragmentLoginBinding
 import com.adylla.task.util.showBottomSheet
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +31,9 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
+
         initListener()
     }
 
@@ -46,7 +54,8 @@ class LoginFragment : Fragment() {
         val senha = binding.editTextSenha.text.toString().trim()
         if(email.isNotBlank()) {
             if (senha.isNotBlank()) {
-                findNavController().navigate(R.id.action_global_homeFragment)
+                binding.progressbar.isVisible = true
+                loginUser(email,senha)
             } else {
                 showBottomSheet(message = getString(R.string.password_empty))
             }
@@ -55,6 +64,24 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun loginUser(email: String,senha: String){
+
+        try {
+            auth.signInWithEmailAndPassword(email,senha)
+                .addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        //Conseguiu autenticar com sucesso
+                        findNavController().navigate((R.id.action_global_homeFragment))
+                    }else{
+                        //Ocorreu falha na autenticação
+                        binding.progressbar.isVisible = false
+                        Toast.makeText(requireContext(),task.exception?.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+        }catch (erro: Exception){
+            Toast.makeText(requireContext(),erro.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
