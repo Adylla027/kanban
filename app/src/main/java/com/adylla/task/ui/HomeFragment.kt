@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.adylla.task.R
 import com.adylla.task.databinding.FragmentHomeBinding
 import com.adylla.task.ui.adapter.ViewPagerAdapter
@@ -34,13 +35,21 @@ class HomeFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        initListeners()
+
         initTabs()
     }
 
     private fun initListeners(){
         binding.btnLogout.setOnClickListener {
             showBottomSheet(
-                tittleButton = R.string.bu
+                tittleButton = R.string.text_button_dialog_confirm_logout,
+                titleDialog =  R.string.text_title_dialog_confira_logout,
+                message = getString(R.string.text_message_dialog_confirm_logout),
+                onClick = {
+                    auth.signOut()
+                    findNavController().navigate(R.id.action_homeFragment_to_autentication2)
+                }
             )
 
         }

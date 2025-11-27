@@ -28,6 +28,13 @@
     <string name="text_title_toolbar_recover_account_fragment">Recuperar conta</string>
     <string name="text_button_recover_account_fragment">Enviar</string>
 
+
+
+    <string name="text_title_dialog_confira_logout">Deseja sair da sua conta?</string>
+    <string name="text_button_dialog_confirm_logout">Confirmar</string>
+    <string name="text_message_dialog_confirm_logout">Aperte em confirmar para sair</string>
+
+
     <string name="description_empty_form_task_fragment">Preencha uma descrição!</string>
     <string name="title_nova_tarefa_formtask_fragment">Nova tarefa</string>
     <string name="description_text">Descrição</string>
