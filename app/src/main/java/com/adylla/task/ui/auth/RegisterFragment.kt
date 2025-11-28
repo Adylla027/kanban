@@ -50,7 +50,6 @@ class RegisterFragment : Fragment() {
             if (senha.isNotBlank()) {
                 binding.progressbar.isVisible = true
                 RegisterUser(email, senha)
-                findNavController().navigate(R.id.action_global_homeFragment)
             } else {
                 showBottomSheet(message = getString(R.string.password_empty_register_gragment))
             }
