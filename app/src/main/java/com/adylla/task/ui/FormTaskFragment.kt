@@ -10,18 +10,23 @@ import com.adylla.task.R
 import com.adylla.task.databinding.FragmentFormTaskBinding
 import com.adylla.task.util.initToolbar
 import com.adylla.task.util.showBottomSheet
+import com.google.firebase.firestore.FirebaseFirestore
 
 class FormTaskFragment : Fragment() {
     private var _binding: FragmentFormTaskBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentFormTaskBinding.inflate(inflater, container, false)
+
+        firestore = FirebaseFirestore.getInstance()
+
         return binding.root
     }
 
@@ -30,6 +35,7 @@ class FormTaskFragment : Fragment() {
         initToolbar(binding.toolbar)
         initListener()
     }
+
     private fun initListener(){
         binding.buttonSave.setOnClickListener {
             valideData()
@@ -40,9 +46,33 @@ class FormTaskFragment : Fragment() {
         val description = binding.editTextDescricao.text.toString().trim()
         if (description.isNotBlank()){
             Toast.makeText(requireContext(),"Tudo OK!", Toast.LENGTH_SHORT).show()
-        }else{
+        } else {
             showBottomSheet(message = getString(R.string.description_empty_form_task_fragment))
         }
+    }
+
+    private fun saveTask(description: String){
+        val id = firestore.collection("tasks").document().id
+
+        val task = hashMapOf(
+            "id" to id,
+            "description" to description
+        )
+
+        firestore.collection("tasks")
+            .document(id)
+            .set(task)
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(),"tarefa salva", Toast.LENGTH_SHORT).show()
+                binding.editTextDescricao.setText("")
+
+
+
+            }
+            .addOnFailureListener {
+                erro->
+                Toast.makeText(requireContext(),"Erro: ${erro.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     override fun onDestroyView() {
