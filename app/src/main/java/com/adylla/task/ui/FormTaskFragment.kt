@@ -7,16 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.adylla.task.R
+import com.adylla.task.data.model.Status
 import com.adylla.task.databinding.FragmentFormTaskBinding
 import com.adylla.task.util.initToolbar
 import com.adylla.task.util.showBottomSheet
 import com.google.firebase.firestore.FirebaseFirestore
 
 class FormTaskFragment : Fragment() {
+
     private var _binding: FragmentFormTaskBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var firestore: FirebaseFirestore
+
+    private var status: Status = Status.TODO
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,9 +28,7 @@ class FormTaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentFormTaskBinding.inflate(inflater, container, false)
-
         firestore = FirebaseFirestore.getInstance()
-
         return binding.root
     }
 
@@ -36,43 +38,51 @@ class FormTaskFragment : Fragment() {
         initListener()
     }
 
-    private fun initListener(){
+    private fun initListener() {
+
+        // ⭐ LISTENER DO STATUS CORRIGIDO
+        binding.radioGroup.setOnCheckedChangeListener { _, id ->
+            status = when(id) {
+                R.id.rbTodo -> Status.TODO
+                R.id.rbDoing -> Status.DOING
+                else -> Status.DONE
+            }
+        }
+
         binding.buttonSave.setOnClickListener {
             valideData()
         }
     }
 
-    private fun valideData(){
+    private fun valideData() {
         val description = binding.editTextDescricao.text.toString().trim()
-        if (description.isNotBlank()){
-            saveTask(description)
-            Toast.makeText(requireContext(),"Tudo OK!", Toast.LENGTH_SHORT).show()
+
+        if (description.isNotBlank()) {
+            saveTask(description, status)
         } else {
             showBottomSheet(message = getString(R.string.description_empty_form_task_fragment))
         }
     }
 
-    private fun saveTask(description: String){
+    private fun saveTask(description: String, status: Status) {
+
         val id = firestore.collection("tasks").document().id
 
         val task = hashMapOf(
             "id" to id,
-            "description" to description
+            "description" to description,
+            "status" to status.name
         )
 
         firestore.collection("tasks")
             .document(id)
             .set(task)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(),"tarefa salva", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Tarefa salva!", Toast.LENGTH_SHORT).show()
                 binding.editTextDescricao.setText("")
-
-
-
             }
-            .addOnFailureListener {
-                erro->
-                Toast.makeText(requireContext(),"Erro: ${erro.message}", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { erro ->
+                Toast.makeText(requireContext(), "Erro: ${erro.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
