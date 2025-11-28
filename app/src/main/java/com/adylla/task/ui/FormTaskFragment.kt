@@ -45,6 +45,7 @@ class FormTaskFragment : Fragment() {
     private fun valideData(){
         val description = binding.editTextDescricao.text.toString().trim()
         if (description.isNotBlank()){
+            saveTask(description)
             Toast.makeText(requireContext(),"Tudo OK!", Toast.LENGTH_SHORT).show()
         } else {
             showBottomSheet(message = getString(R.string.description_empty_form_task_fragment))
